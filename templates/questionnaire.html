@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Assessment | Career Compass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Career Compass</h1>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Career Assessment Questionnaire</h1>
+            <p>Complete this questionnaire to receive personalized career recommendations based on your profile.</p>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="form-section">
+            <form method="POST" action="{{ url_for('submit') }}">
+                <h2>Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="age">Age (20-50):</label>
+                    <input type="number" id="age" name="age" min="20" max="50" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="education_level">Education Level:</label>
+                    <select id="education_level" name="education_level" required>
+                        {% for level in education_levels %}
+                            <option value="{{ level }}">{{ level }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        {% for g in gender_options %}
+                            <option value="{{ g }}">{{ g }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <h2>Career Preferences</h2>
+                
+                <div class="form-group">
+                    <label for="career_category">Preferred Career Category:</label>
+                    <select id="career_category" name="career_category" required>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="work_environment_preference">Work Environment Preference:</label>
+                    <select id="work_environment_preference" name="work_environment_preference" required>
+                        {% for env in work_envs %}
+                            <option value="{{ env }}">{{ env }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="min_salary">Minimum Expected Salary (USD):</label>
+                    <input type="number" id="min_salary" name="min_salary" min="20000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="max_salary">Maximum Expected Salary (USD):</label>
+                    <input type="number" id="max_salary" name="max_salary" min="20000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="job_growth_interest">Interest in Job Growth Opportunities (0-100):</label>
+                    <div class="slider-container">
+                        <input type="range" id="job_growth_interest" name="job_growth_interest" min="0" max="100" value="50" class="slider" oninput="updateJobGrowthValue(this.value)">
+                        <output id="job_growth_value" class="slider-value">50</output>
+                    </div>
+                </div>
+                
+                <h2>Skills Assessment</h2>
+                <p>Rate your skills from 0 (Very Low) to 100 (Very High)</p>
+                
+                {% for skill, description in skill_descriptions.items() %}
+                <div class="form-group">
+                    <label for="{{ skill }}">{{ description }} (0-100):</label>
+                    <div class="slider-container">
+                        <input type="range" id="{{ skill }}" name="{{ skill }}" min="0" max="100" value="50" class="slider" oninput="updateSkillValue('{{ skill }}', this.value)">
+                        <output id="{{ skill }}_value" class="slider-value">50</output>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Get My Career Recommendations</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Career Compass | Career Recommendation System</p>
+        </div>
+    </footer>
+    
+    <script>
+        function updateJobGrowthValue(val) {
+            document.getElementById('job_growth_value').textContent = val;
+        }
+        
+        function updateSkillValue(skillId, val) {
+            document.getElementById(skillId + '_value').textContent = val;
+        }
+    </script>
+</body>
+</html>

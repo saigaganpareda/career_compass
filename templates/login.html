@@ -1,0 +1,30 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Career Compass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header><div class="container"><h1>Career Compass - Login</h1></div></header>
+    <section class="container">
+        <div class="form-section">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Log In</button>
+                </div>
+                <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

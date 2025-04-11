@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Compass | Find Your Perfect Career Path</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Career Compass</h1>
+            {% if current_user.is_authenticated %}
+               <a href="{{ url_for('logout') }}" class="btn" style="float:right">Logout</a>
+               <a href="{{ url_for('view_history') }}" class="btn" style="float:right; margin-right: 10px;">My History</a>
+            {% else %}
+               <a href="{{ url_for('login') }}" class="btn" style="float:right">Login</a>
+               <a href="{{ url_for('signup') }}" class="btn" style="float:right; margin-right: 10px;">Sign Up</a>
+        {% endif %}
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Your Ideal Career Path</h1>
+            <p>Our advanced recommendation system analyzes your skills, interests, and preferences to suggest careers that match your unique profile.</p>
+            <a href="{{ url_for('questionnaire') }}" class="btn">Start Your Career Assessment</a>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="grid">
+            <div class="result-card">
+                <div class="result-header">
+                    <h2>Personalized Matches</h2>
+                </div>
+                <div class="result-body">
+                    <p>Get career recommendations tailored to your unique combination of skills, interests, and preferences.</p>
+                </div>
+            </div>
+            
+            <div class="result-card">
+                <div class="result-header">
+                    <h2>Detailed Insights</h2>
+                </div>
+                <div class="result-body">
+                    <p>Learn about job descriptions, required skills, and resources to help you pursue your ideal career path.</p>
+                </div>
+            </div>
+            
+            <div class="result-card">
+                <div class="result-header">
+                    <h2>Data-Driven Results</h2>
+                </div>
+                <div class="result-body">
+                    <p>Our recommendations are powered by machine learning algorithms trained on comprehensive career data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Career Compass | Career Recommendation System</p>
+        </div>
+    </footer>
+</body>
+</html>

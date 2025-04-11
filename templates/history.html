@@ -1,0 +1,31 @@
+<!-- templates/history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Assessment History | Career Compass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header><div class="container"><h1>My Past Career Assessments</h1></div></header>
+    <section class="container">
+        {% if history %}
+            <div class="form-section">
+                {% for h in history %}
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h2>{{ h.timestamp.strftime("%Y-%m-%d %H:%M") }}</h2>
+                        </div>
+                        <div class="result-body">
+                            <p><strong>Submitted Data:</strong> {{ h.data }}</p>
+                            <p><strong>Results:</strong> {{ h.results }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No assessments found. Take one <a href="{{ url_for('questionnaire') }}">here</a>.</p>
+        {% endif %}
+    </section>
+</body>
+</html>
