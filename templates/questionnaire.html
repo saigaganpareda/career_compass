@@ -22,12 +22,16 @@
     
     <section class="container">
         <div class="form-section">
+            {% if error %}
+              <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
             <form method="POST" action="{{ url_for('submit') }}">
                 <h2>Personal Information</h2>
                 
                 <div class="form-group">
-                    <label for="age">Age (20-50):</label>
-                    <input type="number" id="age" name="age" min="20" max="50" required>
+                    <label for="age">Age (18-60):</label>
+                    <input type="number" id="age" name="age" min="18" max="60" required>
                 </div>
                 
                 <div class="form-group">
@@ -69,13 +73,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="min_salary">Minimum Expected Salary (USD):</label>
-                    <input type="number" id="min_salary" name="min_salary" min="20000" required>
+                    <label for="min_salary">Minimum Expected Salary :</label>
+                    <input type="number" id="min_salary" name="min_salary" min="0" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="max_salary">Maximum Expected Salary (USD):</label>
-                    <input type="number" id="max_salary" name="max_salary" min="20000" required>
+                    <input type="number" id="max_salary" name="max_salary" min="0" required>
                 </div>
                 
                 <div class="form-group">

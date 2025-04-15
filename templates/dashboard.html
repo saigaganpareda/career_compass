@@ -1,0 +1,60 @@
+<!-- dashboard.html with Chart.js and Tailwind CSS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Career Compass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-4xl mx-auto p-6">
+        <h2 class="text-2xl font-bold text-blue-700 mb-6">Welcome, {{ current_user.name }} 👋</h2>
+
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-semibold mb-2">Your Top Career Recommendations</h3>
+            {% if career_counts %}
+                <canvas id="careerChart" width="400" height="200"></canvas>
+            {% else %}
+                <p class="text-gray-500">No assessments yet. <a href="{{ url_for('questionnaire') }}" class="text-blue-600 underline">Take one now</a>.</p>
+            {% endif %}
+        </div>
+
+        <div class="flex space-x-4">
+            <a href="{{ url_for('questionnaire') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">🎯 Take New Assessment</a>
+            <a href="{{ url_for('view_history') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">📄 View History</a>
+            <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">🚪 Logout</a>
+        </div>
+    </div>
+
+    {% if career_counts %}
+    <script>
+        const ctx = document.getElementById('careerChart').getContext('2d');
+        const careerChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ career_counts.keys() | list | tojson }},
+                datasets: [{
+                    label: 'Top Career Matches',
+                    data: {{ career_counts.values() | list | tojson }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

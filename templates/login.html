@@ -6,10 +6,34 @@
     <title>Login | Career Compass</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+        <li style="color:red;">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 <body>
     <header><div class="container"><h1>Career Compass - Login</h1></div></header>
     <section class="container">
         <div class="form-section">
+            {% if error %}
+               <p style="color:red;">{{ error }}</p>
+            {% endif %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul>
+                 {% for category, message in messages %}
+                   <li class="flash {{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
             <form method="POST">
                 <div class="form-group">
                     <label for="email">Email Address:</label>

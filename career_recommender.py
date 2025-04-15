@@ -874,8 +874,8 @@ class CareerRecommendationSystem:
         # Age
         while True:
             try:
-                age = int(input("Enter your age (20-50): "))
-                if 20 <= age <= 50:
+                age = int(input("Enter your age (18-60): "))
+                if 18 <= age <= 60:
                     user_data['age'] = age
                     break
                 else:
@@ -987,7 +987,7 @@ class CareerRecommendationSystem:
                 min_salary = int(input("Enter your minimum expected annual salary (USD): "))
                 max_salary = int(input("Enter your maximum expected annual salary (USD): "))
                 
-                if min_salary > 0 and max_salary >= min_salary:
+                if min_salary >= 0 and max_salary >= min_salary:
                     # Use the average of the range for the model
                     user_data['annual_salary_expectation'] = (min_salary + max_salary) // 2
                     break
