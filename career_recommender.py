@@ -20,6 +20,16 @@ class CareerRecommendationSystem:
         self.career_descriptions = self.get_career_descriptions()
         self.career_resources = self.get_career_resources()
         self.load_dataset()
+
+    def download_model_if_missing(self, model_path='career_recommendation_model.pkl'):
+        if not os.path.exists(model_path):
+           print("Downloading model from Google Drive...")
+           url = 'https://drive.google.com/uc?export=download&id=1NFPrZoO-IPO3lprRltGe2qELleefxFwz'
+           response = requests.get(url)
+           with open(model_path, 'wb') as f:
+              f.write(response.content)
+           print("Model downloaded successfully.")
+    
     
     def get_career_descriptions(self):
         """Dictionary of career descriptions"""
@@ -820,6 +830,8 @@ class CareerRecommendationSystem:
         print(f"Model saved to {model_path}")
     
     def load_model(self, model_path='career_recommendation_model.pkl'):
+        self.download_model_if_missing(model_path)
+
         """Load the model and preprocessor"""
         try:
             model_data = joblib.load(model_path)
