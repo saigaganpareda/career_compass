@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template, request, redirect, url_for
 from flask import flash
 from flask_login import login_required
+from pytz import timezone
+
 import pandas as pd
 from career_recommender import CareerRecommendationSystem
 
@@ -165,10 +167,34 @@ def load_user(user_id):
 
 import ast  # at the top of your file if not already imported
 
+# @app.route('/history')
+# @login_required
+# def view_history():
+#     raw_history = AssessmentHistory.query.filter_by(user_id=current_user.id).order_by(AssessmentHistory.timestamp.desc()).all()
+
+#     history = []
+#     for item in raw_history:
+#         try:
+#             results = ast.literal_eval(item.results)
+#         except:
+#             results = []
+
+#         top_career = results[0]['name'] if results else 'N/A'
+
+#         history.append({
+#             'timestamp': item.timestamp,
+#             'top_career': top_career,
+#             'results': results
+#         })
+
+#         ist = timezone('Asia/Kolkata')
+#         return render_template('history.html', history=history, tz=ist)
 @app.route('/history')
 @login_required
 def view_history():
     raw_history = AssessmentHistory.query.filter_by(user_id=current_user.id).order_by(AssessmentHistory.timestamp.desc()).all()
+
+    print("✔️ Raw History Count:", len(raw_history))  # Debugging
 
     history = []
     for item in raw_history:
@@ -185,7 +211,9 @@ def view_history():
             'results': results
         })
 
-    return render_template('history.html', history=history)
+    ist = timezone('Asia/Kolkata')
+    return render_template('history.html', history=history, tz=ist)
+
 
 #  @app.route('/submit', methods=['POST'])
 # @login_required

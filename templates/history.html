@@ -24,7 +24,10 @@
                         {% for item in history %}
                             {% set results = item.results %}
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 text-sm text-gray-700">{{ item.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">
+                                    {{ item.timestamp.astimezone(tz).strftime('%d-%m-%Y %I:%M %p') }}
+                                </td>
+                                
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ item.top_career }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ results[0]['name'] if results else 'N/A' }}</td>
                                 <td class="px-6 py-4 text-sm">
