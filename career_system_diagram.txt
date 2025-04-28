@@ -1,0 +1,46 @@
+CAREER RECOMMENDATION SYSTEM ARCHITECTURE
+========================================
+
+1. USER INTERFACE LAYER
+-----------------------
+[Landing Page] → [Login/Signup] → [Career Assessment] → [Results Display]
+
+2. APPLICATION LAYER
+-------------------
+[Flask Framework] → [Route Handler] → [Session Management] → [Form Validation]
+
+3. BUSINESS LOGIC LAYER
+----------------------
+CareerRecommendationSystem:
+- Data Processing
+- ML Model Prediction
+- Career Categories & Descriptions
+
+4. DATA LAYER
+------------
+[User Database] ←→ [Assessment History] ←→ [Career Database] ←→ [ML Model Storage]
+
+5. SECURITY LAYER
+----------------
+[Password Hashing] → [Session Security] → [Route Protection] → [Data Encryption]
+
+DATA FLOW PATHS:
+----------------
+1. User Registration:
+   User → Signup Form → Password Hashing → User Database
+
+2. Authentication:
+   User → Login Form → Session Creation → Protected Routes
+
+3. Career Assessment:
+   User Input → Form Validation → Data Processing → ML Model → Career Recommendations → Results Display
+
+4. History Management:
+   User Request → Session Verification → Database Query → History Display
+
+COMPONENT INTERACTIONS:
+----------------------
+Frontend ←→ Flask Routes ←→ Business Logic ←→ Database
+     ↑            ↑              ↑              ↑
+     └────────────┴──────────────┴──────────────┘
+               Security Layer 
